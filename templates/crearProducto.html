@@ -23,18 +23,21 @@
                         </h4>
                         <div>
                                 <div class=" mtext-102 class-group">
-                                    <label for="">Referencia del Producto </label>
+                                    <label for="">Categoria</label>
                                     <div class="bor8 m-b-20 how-pos4-parent">
-                                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="refProducto" placeholder="12554878">
-                                        <img class="how-pos4 pointer-none" src="{{url_for('static',filename='images/icons/icon-hash.png')}}" alt="ICON" height="25"
-                                            style="opacity:0.25;">
+                                        <select class="custom-select stext-111 cl2 plh3 size-116 p-l-62 p-r-30"  name="categoria">
+                                            <option selected disabled>Seleccione una Categoria</option>
+                                            <option value="Calzado">Calzado</option>
+                                            <option value="Camisas">Camisas</option>
+                                            <option value="Jean">Jean</option>
+                                                                                </select>
                                     </div>
                                 </div>
 
                                     <div class=" mtext-102 class-group">
                                         <label for="">Productos en Stock </label>
                                         <div class="bor8 m-b-20 how-pos4-parent">
-                                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="number" name="stockProducto" placeholder="25">
+                                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="number" name="stock" placeholder="25">
                                             <img class="how-pos4 pointer-none" src="{{url_for('static',filename='images/icons/icon-stock.png')}}" alt="ICON" height="25"
                                                 style="opacity:0.25;">
                                         </div>
@@ -42,7 +45,7 @@
                                 <div class=" mtext-102 class-group">
                                     <label for=""> Nombre del Producto </label>
                                     <div class="bor8 m-b-20 how-pos4-parent">
-                                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="nombreProducto"
+                                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="nombre_producto"
                                             placeholder="Lightweight Jacket">
                                         <img class="how-pos4 pointer-none" src="{{url_for('static',filename='images/icons/icon-rompa.png')}}" alt="ICON" height="25"
                                             style="opacity:0.25;">
@@ -52,7 +55,7 @@
                                 <div class=" mtext-102 class-group">
                                     <label for=""> Precio de Producto </label>
                                     <div class="bor8 m-b-20 how-pos4-parent">
-                                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="number" name="precioProducto"
+                                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="number" name="precio"
                                             placeholder="58.79">
                                         <img class="how-pos4 pointer-none" src="{{url_for('static',filename='images/icons/icon-precio.png')}}" alt="ICON" height="25"
                                             style="opacity:0.25;">
@@ -67,12 +70,12 @@
                                 
                                             <div class="size-204 respon6-next">
                                                 <div class="rs1-select2 bor8 bg0">
-                                                    <select class="js-select2" name="time">
-                                                        <option>Seleccione la talla</option>
-                                                        <option> S</option>
-                                                        <option> M</option>
-                                                        <option> L</option>
-                                                        <option> XL</option>
+                                                    <select class="js-select2" name="talla">
+                                                        <option disabled selected>Seleccione la talla</option>
+                                                        <option value="s"> S</option>
+                                                        <option value="m"> M</option>
+                                                        <option value="l"> L</option>
+                                                        <option value="xl"> XL</option>
                                                     </select>
                                                     <div class="dropDownSelect2"></div>
                                                 </div>
@@ -89,12 +92,12 @@
                                 
                                             <div class="size-204 respon6-next">
                                                 <div class="rs1-select2 bor8 bg0">
-                                                    <select class="js-select2" name="time">
-                                                        <option>Seleccione el color</option>
-                                                        <option>Rojo</option>
-                                                        <option>Amarillo</option>
-                                                        <option>Blanco</option>
-                                                        <option>Gris</option>
+                                                    <select class="js-select2" name="color">
+                                                        <option  disabled selected>Seleccione el color</option>
+                                                        <option value="rojo">Rojo</option>
+                                                        <option value="amarillo">Amarillo</option>
+                                                        <option value="blanco">Blanco</option>
+                                                        <option value="gris">Gris</option>
                                                     </select>
                                                     <div class="dropDownSelect2"></div>
                                                 </div>
@@ -110,6 +113,14 @@
                                         <div class="bor8 m-b-30">
                                             <textarea class="stext-111 cl2 plh3 size-120 p-lr-28 p-tb-25" name="desProducto"
                                                 placeholder="Prenda en algodón "></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" mtext-102 class-group">
+                                    <label for=""> Agregar Imagen </label>
+                                    <div class="bor8 m-b-20 how-pos4-parent">
+                                        <div class="bor8 m-b-30">
+                                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="file" name="imagen"  accept="image/png, image/jpeg">
                                         </div>
                                     </div>
                                 </div>
