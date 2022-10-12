@@ -146,6 +146,16 @@ def roles():
     except:
         return False   
 
-
+def actualizarrole(rol,id):
+    try: 
+        db=conexion()
+        cursor=db.cursor()
+        # UPDATE Customers SET ContactName = 'Alfred Schmidt', City= 'Frankfurt' WHERE CustomerID = 1;
+        sql='UPDATE usuarios SET rol=? WHERE id=?'
+        cursor.execute(sql,[rol,id])
+        db.commit()
+        return True
+    except:
+        return False
 
 

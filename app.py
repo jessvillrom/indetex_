@@ -53,6 +53,17 @@ def editar_user(id):
 
 
 
+@app.route('/asignarrol/<id>', methods=['POST'])
+def asignar(id):
+
+    datos=request.form
+    rol=datos['rol']
+    # codigo=datos['codigo']
+
+    actualizar= controller.actualizarrole(rol,id)
+    
+    return redirect(url_for('AdminUser'))
+    
 
 @app.route('/roles')
 def roles():
