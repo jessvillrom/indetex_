@@ -42,6 +42,19 @@ def listaUser():
 
     return lista
 
+
+
+
+@app.route('/eliminaruser/<id>')
+def eliminar(id):
+    dato=controller.eliminiar(id)
+    if dato=='':
+        flash('No es posible hacer eliminar')
+    else:
+        return redirect(url_for('AdminUser'))
+
+
+
 @app.route('/editaruser/<id>')
 def editar_user(id):
 

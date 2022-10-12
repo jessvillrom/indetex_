@@ -159,3 +159,14 @@ def actualizarrole(rol,id):
         return False
 
 
+def eliminiar(id):
+    try: 
+        db=conexion()
+        cursor=db.cursor()
+        # UPDATE Customers SET ContactName = 'Alfred Schmidt', City= 'Frankfurt' WHERE CustomerID = 1;
+        sql='DELETE FROM usuarios WHERE id=?;'
+        cursor.execute(sql,[id])
+        db.commit()
+        return True
+    except:
+        return False
