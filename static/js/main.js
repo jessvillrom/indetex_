@@ -332,3 +332,63 @@ function roles(){
 
     })
 }
+
+
+function producto(){
+    var listadopost;
+    // var url="https://jsonplaceholder.typicode.com/posts/1/comments";
+    var url="http://localhost:5000/verProductos";
+
+
+    fetch(url)
+    .then(response=>response.json())
+    .then((data)=>{
+        listadopost=data;
+        var info="";
+        for(var i=0;i<listadopost.length;i++){
+
+            
+
+            info= info+ "<div class='block2-pic hov-img0'>"
+            info= info+ listadopost[i]['id']
+            info= info+ "<br>"
+            info= info+ listadopost[i]['categoria']
+            info= info+ "<br>"
+            info= info+ listadopost[i]['stock']
+            info= info+ "<br>"
+            info= info+ listadopost[i]['nombre_producto']
+            info= info+ "<br>"
+            info= info+ listadopost[i]['precio']
+            info= info+ "<br>"
+            info= info+ listadopost[i]['talla']
+            info= info+ "<br>"
+            info= info+ listadopost[i]['color']
+            info= info+ "<br>"
+            info= info+ listadopost[i]['descripcion']
+            info= info+ "<br>"
+            info= info+ listadopost[i]['imagen']
+            info= info+ "<br>"
+
+            info= info + "<img src={{url_for('static',filename='images/images/"+listadopost[i]['imagen']+"')}} alt='IMG-PRODUCT'>"
+
+            info=info+"<a href='/EditarProducto' class='block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 '> Editar </a> "
+                            
+                            
+            info= info+ "</div>"
+            info=info+"<div class='block2-txt flex-w flex-t p-t-14'>"
+            info=info+"<div class='block2-txt-child1 flex-col-l'>"
+            info=info+ "<a href='/EditarProducto' class='stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6'>" +listadopost[i]['nombre_producto']+ "</a>"
+            info=info+"<span class='stext-105 cl3'>"+listadopost[i]['precio']+" </span>"
+            info=info+"</div>"
+            info=info+"<div class='block2-txt-child2 flex-r p-t-3'>"
+            info=info+ "<a href='#' class='btn-addwish-b2 dis-block pos-relative js-addwish-b2'>"
+            info=info+ " <img class='icon-heart1 dis-block trans-04' src='{{url_for('static',filename='images/icons/icon-heart-01.png')}}'alt='ICON'>"
+            info=info+ "<img class='icon-heart2 dis-block trans-04 ab-t-l' src='{{url_for('static',filename='images/icons/icon-heart-02.png')}}' alt='ICON'>"
+            info=info+ "</a>"
+            info=info+ "</div>"
+            info=info+ "</div> "
+        }
+        document.getElementById('listaproducto').innerHTML=info;
+
+    })
+}

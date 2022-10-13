@@ -170,3 +170,44 @@ def eliminiar(id):
         return True
     except:
         return False
+
+
+def guardarproducto(categoria,stock,nombre_producto,precio,talla,color,descripcion,imagen):
+    try:
+        db=conexion()
+        cursor=db.cursor()
+        # sql='INSERT INTO usuarios(nombre,apellido,email,password,cod_verificacion,verificado,rol) VALUES(?,?,?,?,?,?,?)'
+        sql='INSERT INTO productos(categoria,stock,nombre_producto,precio,talla,color,descripcion,imagen) VALUES(?,?,?,?,?,?,?,?)'
+        cursor.execute(sql,[categoria,stock,nombre_producto,precio,talla,color,descripcion,imagen])
+        db.commit()
+        return True
+    except:
+        return False
+
+def verproductos():
+    try:
+            db=conexion()
+            cursor=db.cursor()
+            # sql='SELECT * FROM usuario WHERE email<>?'
+            sql='SELECT * FROM productos'
+            cursor.execute(sql)
+            resultado=cursor.fetchall()
+            usuarios=[]
+            for u in resultado:
+                registro={
+                        'id':u[0],
+                        'categoria':u[1],
+                        'stock':u[2],
+                        'nombre_producto':u[3],
+                        'precio':u[4],
+                        'talla':u[5],
+                        'color':u[6],
+                        'descripcion':u[7],
+                        'imagen':u[8],
+                        
+                    }
+                usuarios.append(registro)        
+                        
+            return usuarios
+    except:
+            return False   

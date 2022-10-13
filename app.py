@@ -1,13 +1,32 @@
 
+
 from datetime import date, datetime
 import email
 from flask import Flask, render_template, url_for, request, redirect,flash,session
 import controller
 from werkzeug.security import generate_password_hash, check_password_hash
+import os
+from werkzeug.utils import secure_filename
+
 
 app=Flask(__name__)
 
 app.secret_key='Mi clave Secreta'+str(datetime.now)
+
+# UPLOAD_FOLDER = '/path/to/the/uploads'
+UPLOAD_FOLDER= 'static/images/images'
+
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+# Guardar Imagen 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+
 
 @app.route('/inicio')
 def inicio():
@@ -25,9 +44,6 @@ def about():
 def Admin():
     return render_template('bannerControl.html')
 
-@app.route('/AdminPro')
-def AdminPro():
-    return render_template('adminProduct.html')
 
 
 @app.route('/AdminUser')
@@ -215,9 +231,83 @@ def registrar():
 def contac():
     return render_template('contact.html')
 
-@app.route('/crearProducto')
-def crear():
+@app.route('/crearProductos')
+def crearProductos():
     return render_template('crearProducto.html')
+
+# UPLOAD_FOLDER= 'static/images/images'
+# UPLOADS_PATH = join(dirname(realpath(__file__)), 'static\\images\\images')
+
+# app.config['UPLOAD_FOLDER']=UPLOAD_FOLDER
+# app.config['MAX_CONTENT_LENGTH'] =16*1024*1024
+# ALLOWED_EXTENSIONS=set(['png','jpg','jpeg','gif'])
+
+# def allowed_file(filename):
+#     return '.' in filename and filename.rsplit('.',1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+
+
+@app.route('/AdminPro')
+def AdminPro():
+    return render_template('adminProduct.html')
+
+@app.route('/verProductos')
+def verProductos():
+    lista=controller.verproductos()
+
+    return lista
+
+
+
+@app.route('/guardarProducto', methods=['POST'])
+def guardarProducto():
+          
+            datos=request.form
+
+            categoria= datos['categoria']
+            stock= datos['stock']
+            nombre_producto= datos['nombre_producto']
+            precio= datos['precio']
+            talla= datos['talla']
+            color= datos['color']
+            descripcion= datos['descripcion']
+            # imagen= datos['file']
+            fecha= datetime.now()
+                        
+            if categoria!='' and stock!='' and nombre_producto!='' and precio!='' and talla !='' and color!='' and descripcion !='' :
+                
+                file = request.files['imagen']
+                img = file.filename
+
+            
+                
+                
+                # if user does not select file, browser also
+                # submit an empty part without filename
+                if file.filename == '':
+                    
+                    # return print("No funciona 2")
+                    flash('La imagen no fue cargarda correctamente')
+                    return redirect(url_for('crearProducto'))
+                if file and allowed_file(file.filename):
+                    filename = secure_filename(file.filename)
+                    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                    res=controller.guardarproducto(categoria,stock,nombre_producto,precio,talla,color,descripcion,img)
+                    if res:
+                        return redirect(url_for('AdminPro'))
+                    else: 
+                        flash('Error en Base de datos')
+                        return redirect(url_for('crearProductos'))
+                    # return redirect(url_for('uploaded_file',filename=filename))
+                else:
+                    flash('Los datos no han sido diligenciados correctamente')
+                    return redirect(url_for('crearProductos'))
+               
+
+   
+
+
 
 @app.route('/EditarProducto')
 def editar():
